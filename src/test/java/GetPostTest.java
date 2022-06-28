@@ -1,4 +1,8 @@
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,11 +13,14 @@ public class GetPostTest extends SetUp {
     private final HeaderElements headerElements = new HeaderElements();
     private final static String HOME_URL ="https://news-feed-2.dunice-testing.com/";
 
+    @Epic(value = "Posts.")
+    @Feature("Действия с новостью.")
+    @Story("Правильный поиск новости.")
+    @Description(value = "getPostTest.")
     @Test
     public void getPostTest() throws InterruptedException {
         HomePage homePage = new HomePage(HOME_URL);
         account.registrationUser();
-        Thread.sleep(3000);
         assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
         account.getMyProfile().shouldBe(Condition.visible).click();
         posts.addNewPost();
@@ -21,12 +28,14 @@ public class GetPostTest extends SetUp {
         posts.getPost();
         posts.getVoidNewsSearch().shouldBe(Condition.visible);
     }
-
+    @Epic(value = "Posts.")
+    @Feature("Действия с новостью.")
+    @Story("Не правильный поиск новости.")
+    @Description(value = "negativeGetPostTest.")
     @Test
     public void negativeGetPostTest() throws InterruptedException {
         HomePage homePage = new HomePage(HOME_URL);
         account.registrationUser();
-        Thread.sleep(3000);
         assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
         account.getMyProfile().shouldBe(Condition.visible).click();
         posts.addNewPost();

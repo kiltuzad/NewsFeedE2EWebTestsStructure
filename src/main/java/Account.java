@@ -143,9 +143,10 @@ public class Account {
         avatarReg.setValue(file.getAbsolutePath());
         getSubmitRegButton().click();
         headerElements.getHelloHeader().shouldBe(Condition.visible);
+        Thread.sleep(2000);
     }
 
-    public void negativeRegistrationUser() {
+    public void negativeRegistrationUser() throws InterruptedException {
         headerElements.getEnterButton().shouldBe(Condition.visible).click();
         getRegistrationB().shouldBe(Condition.visible);
         emailReg.setValue(Methods.generateRandomHexString(7));
@@ -156,6 +157,7 @@ public class Account {
         File file = new File(new File(avatarPath).getAbsolutePath());
         avatarReg.setValue(file.getAbsolutePath());
         getSubmitRegButton().click();
+        Thread.sleep(2000);
     }
 
     public void updateProfile() {
@@ -177,14 +179,12 @@ public class Account {
     }
     public void deleteUser() throws InterruptedException {
         getDeleteProfile().shouldBe(Condition.visible).click();
-        Thread.sleep(2000);
         Selenide.switchTo().alert().accept();
         headerElements.getNewsFeeds().shouldBe(Condition.visible).click();
     }
     public void negativeDeleteUser() throws InterruptedException {
         getDeleteProfile().shouldBe(Condition.visible).click();
         Selenide.switchTo().alert().dismiss();
-        Thread.sleep(2000);
         headerElements.newsFeeds.shouldBe(Condition.visible).click();
     }
 }

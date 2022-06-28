@@ -1,10 +1,14 @@
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class Posts {
     String newsUpdateTitle;
@@ -42,6 +46,9 @@ public class Posts {
     SelenideElement search =$(By.xpath("//button[text()='Search']"));
     //negative get post
     SelenideElement voidNewsSearch = $(By.xpath("//div[contains(@class,'Search_')]/following-sibling::div"));
+
+    //pagination
+    ElementsCollection newsPosts = $$(By.xpath("//*[@id='root']/div/main/div[2]/div"));
 
     public SelenideElement getUserPostText() {
         return userPostText;
@@ -206,6 +213,13 @@ public class Posts {
         getNewsFeedsSearch().shouldBe(Condition.visible).click();
         newsFeedsSearch.setValue(Methods.generateRandomHexString(10));
         getSearch().shouldBe(Condition.visible).click();
+    }
+
+    public void paginationPost(){
+        List<Object> newsPostsList = new ArrayList<>();
+        for(int i = 0; i<200; i++){
+            newsPostsList.add((newsPosts.get(i).scrollIntoView(true).getText()));
+        }
     }
 
 }
