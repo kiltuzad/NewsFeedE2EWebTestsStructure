@@ -14,6 +14,7 @@ public class Posts {
     String newsUpdateTitle;
     String newsCreationsTitle;
     String newsCreationsTags;
+    String tTitlePostText;
     SelenideElement userPostText = $(By.xpath("//div[contains(text(),'User post')]"));
     SelenideElement newPost = $(By.xpath("//button[text()='New Post']"));
     SelenideElement addNewPostText = $(By.xpath("//div[text()='Add new post']"));
@@ -22,6 +23,7 @@ public class Posts {
     SelenideElement picturePost = $(By.xpath("//input[@name='picture']"));
     SelenideElement tagPost = $(By.xpath("//input[@name='tags']"));
     SelenideElement savePost = $(By.xpath("//button[@type='submit']"));
+    SelenideElement titlePostText = $(By.xpath("//*[@id=\"root\"]/div/div/div[2]/div[4]/div/div[1]/div[1]"));
     //negative
     SelenideElement negativeText = $(By.xpath("//div[contains(text(),'TAGS_NOT')]"));
 
@@ -52,6 +54,10 @@ public class Posts {
 
     public SelenideElement getUserPostText() {
         return userPostText;
+    }
+
+    public SelenideElement getTitlePostText(){
+       return titlePostText;
     }
 
     public SelenideElement getNewPost() {

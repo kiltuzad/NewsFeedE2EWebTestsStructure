@@ -1,5 +1,6 @@
 import com.beust.ah.A;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -7,6 +8,7 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LoginTest extends SetUp {
 
@@ -22,7 +24,7 @@ class LoginTest extends SetUp {
     public void loginTest() throws InterruptedException {
         HomePage homePage = new HomePage(HOME_URL);
         account.loginUser();
-        assertEquals(("Hello, sasa "), headerElements.helloHeader.getText());
+        assertEquals(("Hello, sasa "), headerElements.helloHeader.getText(), "Не валидный логин");
     }
 
     @Epic(value = "Account.")
@@ -33,7 +35,7 @@ class LoginTest extends SetUp {
     public void negativeLoginTest() throws InterruptedException {
         HomePage homePage = new HomePage(HOME_URL);
         account.negativeLoginUser();
-        Thread.sleep(2000);
         account.negativeLogText.shouldBe(Condition.visible);
+        assertEquals(account.negativeLogText.getText(), "Could not find user" , "Прфиль уже существует");
     }
 }

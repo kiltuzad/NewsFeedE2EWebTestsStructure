@@ -22,7 +22,7 @@ class RegistrationTest extends SetUp {
     public void registrationTest() throws InterruptedException {
         HomePage homePage = new HomePage(HOME_URL);
         account.registrationUser();
-        assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
+        assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText(),"Не валидная регистрация");
     }
 
     @Epic(value = "Account.")
@@ -34,6 +34,7 @@ class RegistrationTest extends SetUp {
         HomePage homePage = new HomePage(HOME_URL);
         account.negativeRegistrationUser();
         account.negativeRegText.shouldBe(Condition.visible);
+        assertEquals(account.negativeRegText.getText(), "user email must be a well-formed email address" ,"Валидная регистрация");
     }
 }
 

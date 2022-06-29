@@ -23,7 +23,7 @@ public class UpdateProfileTest extends SetUp{
         assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
         account.getMyProfile().shouldBe(Condition.visible).click();
         account.updateProfile();
-        assertEquals(("Hello, "+account.newUpdateNameText+" "), headerElements.getHelloHeader().getText());
+        assertEquals(("Hello, "+account.newUpdateNameText+" "), headerElements.getHelloHeader().getText(),"Не валидный логин или email");
     }
 
     @Epic(value = "Account.")
@@ -38,5 +38,6 @@ public class UpdateProfileTest extends SetUp{
         account.getMyProfile().shouldBe(Condition.visible).click();
         account.negativeUpdateProfile();
         account.negativeText.shouldBe(Condition.visible);
+        assertEquals(account.negativeText.getText(), "unknown" ,"Валидный email");
     }
 }

@@ -5,7 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DeletePostTest extends SetUp {
     private final Account account = new Account();
@@ -26,6 +26,7 @@ public class DeletePostTest extends SetUp {
         posts.addNewPost();
         posts.deletePost();
         posts.getNewPostTest().shouldNot(Condition.visible);
+        assertFalse(posts.getNewPostTest().shouldNot(Condition.visible).isDisplayed(),"Пост не удалился");
     }
     @Epic(value = "Posts.")
     @Feature("Действия с новостью.")
@@ -40,5 +41,6 @@ public class DeletePostTest extends SetUp {
         posts.addNewPost();
         posts.negativeDeletePost();
         posts.newPostTest.shouldBe(Condition.visible);
+        assertTrue(posts.newPostTest.shouldBe(Condition.visible).isDisplayed(), "Пост удален");
     }
 }

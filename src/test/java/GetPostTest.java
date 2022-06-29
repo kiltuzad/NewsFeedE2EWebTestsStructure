@@ -5,7 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GetPostTest extends SetUp {
     private final Posts posts = new Posts();
@@ -27,6 +27,7 @@ public class GetPostTest extends SetUp {
         headerElements.getNewsFeeds().shouldBe(Condition.visible).click();
         posts.getPost();
         posts.getVoidNewsSearch().shouldBe(Condition.visible);
+        assertTrue(posts.getVoidNewsSearch().shouldBe(Condition.visible).isDisplayed(), "Новость не найдена");
     }
     @Epic(value = "Posts.")
     @Feature("Действия с новостью.")
@@ -42,5 +43,6 @@ public class GetPostTest extends SetUp {
         headerElements.getNewsFeeds().shouldBe(Condition.visible).click();
         posts.negativeGetPost();
         posts.getVoidNewsSearch().shouldNotBe(Condition.visible);
+        assertFalse(posts.getVoidNewsSearch().shouldNotBe(Condition.visible).isDisplayed(), "Новость найдена");
     }
 }

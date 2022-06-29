@@ -23,7 +23,7 @@ public class DeleteUserTest extends SetUp {
         assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
         account.getMyProfile().shouldBe(Condition.visible).click();
         account.deleteUser();
-        assertEquals(("Hello, "+" "), headerElements.getHelloHeader().getText());
+        assertEquals(("Hello, "+" "), headerElements.getHelloHeader().getText(),"Профиль не удалён");
     }
 
     @Epic(value = "Account.")
@@ -37,6 +37,6 @@ public class DeleteUserTest extends SetUp {
         assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
         account.getMyProfile().shouldBe(Condition.visible).click();
         account.negativeDeleteUser();
-        assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText());
+        assertEquals(("Hello, "+account.loginText+" "), headerElements.getHelloHeader().getText(),"Профиль удалён");
     }
 }

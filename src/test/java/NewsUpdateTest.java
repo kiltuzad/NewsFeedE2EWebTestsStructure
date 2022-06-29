@@ -25,7 +25,7 @@ public class NewsUpdateTest extends SetUp{
         account.getMyProfile().shouldBe(Condition.visible).click();
         posts.addNewPost();
         posts.updateNews();
-        assertNotEquals((posts.newsUpdateTitle), posts.newsCreationsTitle);
+        assertNotEquals((posts.newsUpdateTitle), posts.newsCreationsTitle, "Заголовок соответствует пред идущему заголовку");
     }
     @Epic(value = "Posts.")
     @Feature("Действия с новостью.")
@@ -40,5 +40,6 @@ public class NewsUpdateTest extends SetUp{
         posts.addNewPost();
         posts.negativeUpdateNews();
         posts.negativeText.shouldBe(Condition.visible);
+        assertEquals(posts.negativeText.getText(), "TAGS_NOT_VALID", "Валидный тэг");
     }
 }

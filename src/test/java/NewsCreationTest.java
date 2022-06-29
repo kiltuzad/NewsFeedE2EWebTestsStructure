@@ -6,6 +6,7 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class NewsCreationTest extends SetUp{
     private final Account account = new Account();
@@ -25,6 +26,7 @@ public class NewsCreationTest extends SetUp{
         account.getMyProfile().shouldBe(Condition.visible).click();
         posts.addNewPost();
         posts.getNewPostTest().shouldNot(Condition.visible);
+        assertFalse(posts.getNewPostTest().shouldNot(Condition.visible).isDisplayed(), "Что-то пошло не так");
     }
 
     @Epic(value = "Posts.")
@@ -39,5 +41,6 @@ public class NewsCreationTest extends SetUp{
         account.getMyProfile().shouldBe(Condition.visible).click();
         posts.negativeAddNewPost();
         posts.negativeText.shouldBe(Condition.visible);
+        assertEquals(posts.negativeText.getText(), "TAGS_NOT_VALID" ,"Валидный тэг ");
     }
 }
